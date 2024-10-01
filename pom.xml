@@ -60,7 +60,6 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -76,12 +75,12 @@
                         -Dfile.encoding=${project.build.sourceEncoding}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <systemPropertyVariables>
+                    <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
                             <value>${project.build.directory}/allure-results</value>
                         </property>
-                    </systemPropertyVariables>
+                    </systemProperties>
                 </configuration>
                 <dependencies>
                     <dependency>
