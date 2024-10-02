@@ -20,8 +20,6 @@ public class ApiMethods {
         User user = new User(email, password, name);
 
         return RestAssured.given()
-                .log()
-                .all()
                 .header("Content-type", "application/json")
                 .body(user)
                 .post(LOGIN_BASE);
@@ -47,5 +45,15 @@ public class ApiMethods {
         System.out.println(response.asString());
         String token = getTokenFromResponse(response);
         deleteUser(token);
+    }
+
+    public static boolean userExists(String name, String email, String password) {
+        User user = new User(email, password, name);
+
+        return RestAssured.given()
+                .header("Content-type", "application/json")
+                .body(user)
+                .post(LOGIN_BASE)
+                .path("success");
     }
 }

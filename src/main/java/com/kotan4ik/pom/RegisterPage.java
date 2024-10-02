@@ -2,13 +2,19 @@ package com.kotan4ik.pom;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class RegisterPage {
     private static final By NAME_FIELD = By.xpath("//div[label[text()='Имя']]/input");
     private static final By EMAIL_FIELD = By.xpath("//div[label[text()='Email']]/input");
     private static final By PASSWORD_FIELD = By.xpath("//div[label[text()='Пароль']]/input");
     private static final By REGISTER_BUTTON = By.xpath("//button[text()='Зарегистрироваться']");
+    private static final By INCORRECT_PASSWORD_MESSAGE = By.xpath("//p[text()='Некорректный пароль']");
 
     private final WebDriver driver;
 
@@ -34,5 +40,16 @@ public class RegisterPage {
     @Step("Clicking on register button")
     public void clickRegisterButton() {
         driver.findElement(REGISTER_BUTTON).click();
+    }
+
+    @Step("Checking incorrect password message is shown")
+    public boolean isVisibleIncorrectPasswordMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(INCORRECT_PASSWORD_MESSAGE));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 }
