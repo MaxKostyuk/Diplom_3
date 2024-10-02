@@ -10,7 +10,7 @@ public class WebDriverFactory {
 
   public static WebDriver createWebDriver() {
     Browser browser = getActiveBrowser();
-    ConfigLoader configLoader = new ConfigLoader("webdriverconfig.properties");;
+    ConfigLoader configLoader = new ConfigLoader("webdriverconfig.properties");
     switch (browser) {
       case CHROME:
         System.setProperty(WEBDRIVER_CHROME_DRIVER_PROPERTY, configLoader.getProperty("chromeDriverPath"));

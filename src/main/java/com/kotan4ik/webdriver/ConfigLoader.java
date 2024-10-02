@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigLoader {
-    private Properties properties;
+    private final Properties properties;
 
     public ConfigLoader(String filename) {
         properties = new Properties();
