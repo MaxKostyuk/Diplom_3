@@ -1,6 +1,7 @@
 package com.kotan4ik.pom;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,5 +25,22 @@ public class AccountPage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    @Step("Opening account page")
+    public void openPage() {
+        driver.get(ACCOUNT_PAGE_URL);
+    }
+
+    @Step("Putting token to local storage")
+    private void addToken(String token) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.localStorage.setItem('accessToken', 'Bearer " + token + "');");
+    }
+
+    @Step("Opening page with authorization token {token}")
+    public void openPage(String token) {
+        addToken(token);
+        openPage();
     }
 }
