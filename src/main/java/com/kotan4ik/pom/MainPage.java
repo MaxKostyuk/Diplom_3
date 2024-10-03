@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class MainPage {
     private static final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site";
     private static final By HEADER_ACCOUNT_BUTTON = By.xpath("//header//*[@href='/account']");
+    private static final By ENTER_ACCOUNT_BUTTON = By.xpath("//button[text()='Войти в аккаунт']");
     private final WebDriver driver;
 
     public MainPage(WebDriver driver) {
@@ -21,6 +22,11 @@ public class MainPage {
     @Step("Clicking account button in header")
     public void clickHeaderAccountButton() {
         driver.findElement(HEADER_ACCOUNT_BUTTON).click();
+    }
+
+    @Step("Clicking enter account button")
+    public void clickEnterAccountButton() {
+        driver.findElement(ENTER_ACCOUNT_BUTTON).click();
     }
 
 
