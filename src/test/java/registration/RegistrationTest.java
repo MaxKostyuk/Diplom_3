@@ -68,8 +68,8 @@ public class RegistrationTest {
 
     @AfterEach
     public void tearDown() {
+        driver.quit();
         if (ApiMethods.userExists(testData.get("name"), testData.get("email"), testData.get("password")))
             ApiMethods.deleteUserByItsData(testData.get("name"), testData.get("email"), testData.get("password"));
-        driver.quit();
     }
 }
