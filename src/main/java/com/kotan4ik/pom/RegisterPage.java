@@ -15,11 +15,18 @@ public class RegisterPage {
     private static final By PASSWORD_FIELD = By.xpath("//div[label[text()='Пароль']]/input");
     private static final By REGISTER_BUTTON = By.xpath("//button[text()='Зарегистрироваться']");
     private static final By INCORRECT_PASSWORD_MESSAGE = By.xpath("//p[text()='Некорректный пароль']");
+    private static final By ENTER_LINK = By.xpath("//a[@href='/login']");
+    private static final String REGISTER_PAGE_URL = "https://stellarburgers.nomoreparties.site/register";
 
     private final WebDriver driver;
 
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    @Step("Opening register page")
+    public void openPage() {
+        driver.get(REGISTER_PAGE_URL);
     }
 
     @Step("Filling name field with value {name}")
@@ -51,5 +58,10 @@ public class RegisterPage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    @Step("Clicking enter link")
+    public void clickEnterLink() {
+        driver.findElement(ENTER_LINK).click();
     }
 }
