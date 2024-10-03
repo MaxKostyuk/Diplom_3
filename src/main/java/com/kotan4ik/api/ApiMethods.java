@@ -8,11 +8,22 @@ import io.restassured.response.Response;
 
 
 public class ApiMethods {
+    private static final String REGISTER_BASE = "auth/register";
     private static final String LOGIN_BASE = "auth/login";
     private static final String USER_BASE = "auth/user";
 
     static {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/api/";
+    }
+
+    @Step("Create user API request with email = {email}, password = {password}, name = {name}")
+    public static Response createUser(String email, String password, String name) {
+        User user = new User(email, password, name);
+
+        return RestAssured.given()
+                .header("Content-type", "application/json")
+                .body(user)
+                .post(REGISTER_BASE);
     }
 
     @Step("Logging in API request for user with email = {email}, password = {password} and name = {name}")
@@ -42,7 +53,6 @@ public class ApiMethods {
     @Step("Deleting user by name = {name}, email = {email} and password = {password}")
     public static void deleteUserByItsData(String name, String email, String password) {
         Response response = loginUser(email, password, name);
-        System.out.println(response.asString());
         String token = getTokenFromResponse(response);
         deleteUser(token);
     }
