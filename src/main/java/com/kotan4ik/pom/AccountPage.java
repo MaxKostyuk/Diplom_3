@@ -13,6 +13,7 @@ import java.time.Duration;
 public class AccountPage {
     private static final String ACCOUNT_PAGE_URL = "https://stellarburgers.nomoreparties.site/account/profile";
     public static final By EXIT_BUTTON = By.xpath("//button[text()='Выход']");
+    public static final By HEADER_LOGO = By.className("AppHeader_header__logo__2D0X2");
     private final WebDriver driver;
 
     public AccountPage(WebDriver driver) {
@@ -54,5 +55,10 @@ public class AccountPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(EXIT_BUTTON));
         driver.findElement(EXIT_BUTTON).click();
+    }
+
+    @Step("Clicking on header logo")
+    public void clickHeaderLogo() {
+        driver.findElement(HEADER_LOGO).click();
     }
 }
