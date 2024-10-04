@@ -1,6 +1,7 @@
 package com.kotan4ik.pom;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,18 +11,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class AccountPage {
-    private static final String ACCOUNT_PAGE_URL = "https://stellarburgers.nomoreparties.site/account";
+    private static final String ACCOUNT_PAGE_URL = "https://stellarburgers.nomoreparties.site/account/profile";
+    public static final By EXIT_BUTTON = By.xpath("//button[text()='Выход']");
     private final WebDriver driver;
 
     public AccountPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    @Step("Checking current page is account page")
-    public boolean isAccountPage() {
+    @Step("Checking account page is shown")
+    public boolean accountPageIsShown() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
-            return wait.until(ExpectedConditions.urlToBe(ACCOUNT_PAGE_URL));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(EXIT_BUTTON));
+            return true;
         } catch (TimeoutException e) {
             return false;
         }
@@ -30,6 +33,8 @@ public class AccountPage {
     @Step("Opening account page")
     public void openPage() {
         driver.get(ACCOUNT_PAGE_URL);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe(ACCOUNT_PAGE_URL));
     }
 
     @Step("Putting token to local storage")
@@ -42,5 +47,12 @@ public class AccountPage {
     public void openPage(String token) {
         addToken(token);
         openPage();
+    }
+
+    @Step("Clicking logout button")
+    public void clickLogoutButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(EXIT_BUTTON));
+        driver.findElement(EXIT_BUTTON).click();
     }
 }

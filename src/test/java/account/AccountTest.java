@@ -40,7 +40,7 @@ public class AccountTest {
     public void positiveTest() {
         accountPage.openPage();
         accountPage.openPage(token);
-        assertTrue(accountPage.isAccountPage(), "Not expected account page is shown");
+        assertTrue(accountPage.accountPageIsShown(), "Expected account page is not shown");
     }
 
     @Test
@@ -48,7 +48,7 @@ public class AccountTest {
     @Description("Negative test without authorization. Should redirect to an other page")
     public void negativeTestShouldRedirect() {
         accountPage.openPage();
-        assertFalse(accountPage.isAccountPage(), "Expected redirection to an other page");
+        assertFalse(accountPage.accountPageIsShown(), "Expected redirection to an other page");
     }
 
     @AfterEach

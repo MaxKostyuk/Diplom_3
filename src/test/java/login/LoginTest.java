@@ -43,7 +43,7 @@ public class LoginTest {
         loginPage.sendPasswordValue(testData.get("password"));
         loginPage.pushEnterButton();
         mainPage.clickHeaderAccountButton();
-        assertTrue(accountPage.isAccountPage(), "Expected account page is not shown");
+        assertTrue(accountPage.accountPageIsShown(), "Expected account page is not shown");
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LoginTest {
         loginPage.sendPasswordValue(testData.get("password"));
         loginPage.pushEnterButton();
         mainPage.clickHeaderAccountButton();
-        assertTrue(accountPage.isAccountPage(), "Expected account page is not shown");
+        assertTrue(accountPage.accountPageIsShown(), "Expected account page is not shown");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class LoginTest {
         loginPage.sendPasswordValue(testData.get("password"));
         loginPage.pushEnterButton();
         mainPage.clickHeaderAccountButton();
-        assertTrue(accountPage.isAccountPage(), "Expected account page is not shown");
+        assertTrue(accountPage.accountPageIsShown(), "Expected account page is not shown");
     }
 
     @Test
@@ -86,7 +86,7 @@ public class LoginTest {
         loginPage.sendPasswordValue(testData.get("password"));
         loginPage.pushEnterButton();
         mainPage.clickHeaderAccountButton();
-        assertTrue(accountPage.isAccountPage(), "Expected account page is not shown");
+        assertTrue(accountPage.accountPageIsShown(), "Expected account page is not shown");
     }
 
     @AfterEach

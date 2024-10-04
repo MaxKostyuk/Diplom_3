@@ -38,16 +38,34 @@ public class LoginPage {
 
     @Step("Filling email field with value {email}")
     public void sendEmailValue(String email) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(EMAIL_FIELD));
         driver.findElement(EMAIL_FIELD).sendKeys(email);
     }
 
     @Step("Filling password field with value {password}")
     public void sendPasswordValue(String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_FIELD));
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
     }
 
     @Step("Pushing enter button to submit login")
     public void pushEnterButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ENTER_BUTTON));
         driver.findElement(ENTER_BUTTON).click();
+    }
+
+    @Step("Opening login page")
+    public void openPage() {
+        driver.get(LOGIN_PAGE_URL);
+    }
+
+    @Step("Logging in")
+    public void login(String email, String password) {
+        sendEmailValue(email);
+        sendPasswordValue(password);
+        pushEnterButton();
     }
 }
